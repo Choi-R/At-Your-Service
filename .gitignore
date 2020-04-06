@@ -1,0 +1,4 @@
+node_modules
+coverage
+__test__/user.test.js
+__test__/fixtugitres/user.fixture.js

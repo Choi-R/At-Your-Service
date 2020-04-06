@@ -1,0 +1,2538 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Built by team A",
+    "version": "1.0.0",
+    "title": "Buku Saku Documentation",
+    "contact": {
+      "email": "ezanirvana@gmail.com"
+    }
+  },
+  "host": "",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "User Collection",
+      "description": "Info for users API"
+    },
+    {
+      "name": "Business Collection",
+      "description": "Everything about Business"
+    },
+    {
+      "name": "Inquiry Collection",
+      "description": "Everything about Inquiry"
+    },
+    {
+      "name": "Article Collection",
+      "description": "Everything about Article"
+    },
+    {
+      "name": "Comment Collection",
+      "description": "Everything about Article's Comment"
+    },
+    {
+      "name": "Ads Collection",
+      "description": "Everything about Advertisement"
+    },
+    {
+      "name": "Support Collection",
+      "description": "Everything about User Support"
+    }
+  ],
+  "paths": {
+    "/user/register": {
+      "post": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "create new user",
+        "description": "",
+        "operationId": "createUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Test"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "rahmadityac@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "password_confirmation": {
+                  "type": "string",
+                  "example": "123456"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "user created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/activation/{token}": {
+      "get": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "Activate user",
+        "description": "",
+        "operationId": "activateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "Login user",
+        "description": "",
+        "operationId": "loginUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "rahmadityac@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/forgotPassword": {
+      "post": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "request token to reset password",
+        "description": "",
+        "operationId": "forgotPassword",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "rahmadityac@gmail.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "if the email registered, we will sent you email",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/resetPassword/{token}": {
+      "post": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "change password",
+        "description": "",
+        "operationId": "resetPassword",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/resetPassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "password changed",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/uploadImage": {
+      "put": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "change picture profile",
+        "description": "",
+        "operationId": "uploadFile",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/user/updateProfile": {
+      "put": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "Update user profile",
+        "description": "",
+        "operationId": "updateProfile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "profile updated",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/user/userProfile": {
+      "get": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "Get user data",
+        "description": "",
+        "operationId": "viewProfile",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/getAndCount": {
+      "get": {
+        "tags": [
+          "User Collection"
+        ],
+        "summary": "Admin only. Get all user with pagination and count the total, the confirmed, and the not confirmed yet",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Which page do you want? The default is 1",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "What's the limit of documents per page? The default is 10",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Here you go"
+          },
+          "404": {
+            "description": "ERROR. Please contact the backend team"
+          },
+          "422": {
+            "description": "ERROR. Not an Admin"
+          }
+        }
+      }
+    },
+    "/business": {
+      "post": {
+        "tags": [
+          "Business Collection"
+        ],
+        "summary": "Admin create a business",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Gojek"
+                },
+                "company": {
+                  "type": "string",
+                  "example": "PT. Karya Anak Bangsa"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "PT Aplikasi Karya Anak Bangsa, doing business as Gojek, is a Southeast Asian on-demand multi-service platform and digital payment technology group. Gojek was first established in Indonesia in 2010 as a call center to connect consumers to courier delivery and two-wheeled ride-hailing services"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Logistic"
+                },
+                "web_link": {
+                  "type": "string",
+                  "example": "www.gojek.com"
+                },
+                "gplay_link": {
+                  "type": "string",
+                  "example": "https://play.google.com/store/apps/details?id=com.gojek.app&hl=en"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created a business"
+          },
+          "401": {
+            "description": "Can't create because you're not an admin"
+          },
+          "422": {
+            "description": "Failed to create. Check if body format is correct. Else, contact backend team."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Business Collection"
+        ],
+        "summary": "Show either all businesses, by _id, by category, or by description/title search.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "_id",
+            "description": "Show a business by it's _id",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "description": "Show the businesses by their category",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "description": "Show the businesses by searching (impartially) their description or title",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully show the business(es) you're looking for"
+          },
+          "404": {
+            "description": "Failed. Please kindly check the query format before contacting the backend team."
+          }
+        }
+      }
+    },
+    "/business/{_id}": {
+      "post": {
+        "tags": [
+          "Business Collection"
+        ],
+        "summary": "Bookmark a business",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Insert the business's _id here",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully bookmark a business"
+          },
+          "422": {
+            "description": "Failed to bookmark, maybe wrong id? Contact backend team."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Business Collection"
+        ],
+        "summary": "Approve one business by admin",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Insert the business's _id here",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully approve a business"
+          },
+          "401": {
+            "description": "Can't approve because you're not an admin"
+          },
+          "422": {
+            "description": "Failed to approve, maybe wrong id? Contact backend team."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Business Collection"
+        ],
+        "summary": "Edit a business's document",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Insert the business's _id here",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Gojek"
+                },
+                "company": {
+                  "type": "string",
+                  "example": "PT. Karya Anak Bangsa"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "PT Aplikasi Karya Anak Bangsa, doing business as Gojek, is a Southeast Asian on-demand multi-service platform and digital payment technology group. Gojek was first established in Indonesia in 2010 as a call center to connect consumers to courier delivery and two-wheeled ride-hailing services"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Logistic"
+                },
+                "web_link": {
+                  "type": "string",
+                  "example": "www.gojek.com"
+                },
+                "gplay_link": {
+                  "type": "string",
+                  "example": "https://play.google.com/store/apps/details?id=com.gojek.app&hl=en"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully edited a business"
+          },
+          "401": {
+            "description": "Can't edit because you're not an admin"
+          },
+          "422": {
+            "description": "Failed to edit. Check if body format is correct. Else, contact backend team."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Business Collection"
+        ],
+        "summary": "Delete a business document",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Should be filled with business's id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted a business"
+          },
+          "401": {
+            "description": "Can't delete because you're not an admin"
+          },
+          "422": {
+            "description": "Failed to delete. Please contact backend team for support."
+          }
+        }
+      }
+    },
+    "/business/logo/{_id}": {
+      "put": {
+        "tags": [
+          "Business Collection"
+        ],
+        "summary": "Upload a business's logo",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Insert the business's _id here",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "description": "Upload the business's logo here",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully uploaded a logo"
+          },
+          "401": {
+            "description": "Can't upload because you're not an admin"
+          },
+          "422": {
+            "description": "Failed to upload. Please contact backend team for support."
+          }
+        }
+      }
+    },
+    "/inquiry": {
+      "get": {
+        "tags": [
+          "Inquiry Collection"
+        ],
+        "summary": "Show all or spesific inquiry (by _id), just say so in query.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "_id",
+            "description": "Show an inquiry by it's _id. If empty, show all inquiries",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully get the data"
+          },
+          "404": {
+            "description": "Failed to get data. Wrong _id or maybe already deleted"
+          }
+        }
+      }
+    },
+    "/inquiry/{_id}": {
+      "post": {
+        "tags": [
+          "Inquiry Collection"
+        ],
+        "summary": "Create an inquiry",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Insert the business's _id here",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Test"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "08123456789"
+                },
+                "job": {
+                  "type": "string",
+                  "example": "Medical Staff"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "We plan to hold an event on DD-MM-YYYY at X. We wish to form a partnership with your company in regard to........"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created an inquiry"
+          },
+          "401": {
+            "description": "Failed to create. Please login first"
+          },
+          "422": {
+            "description": "Failed to create. Please check the body format before contacting the backend team"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Inquiry Collection"
+        ],
+        "summary": "Update an inquiry",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Insert the inquiry's _id here",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Test"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "08123456789"
+                },
+                "job": {
+                  "type": "string",
+                  "example": "Medical Staff"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "We plan to hold an event on DD-MM-YYYY at X. We wish to form a partnership with your company in regard to........"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This inquiry has been updated"
+          },
+          "401": {
+            "description": "Failed to edit. Are you an admin?"
+          },
+          "422": {
+            "description": "Failed to delete. Please check the body format before contacting the backend team"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Inquiry Collection"
+        ],
+        "summary": "Delete an inquiry",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Insert the inquiry's _id here",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Should be filled with token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This inquiry has been deleted"
+          },
+          "401": {
+            "description": "Failed to delete. Are you an admin?"
+          },
+          "422": {
+            "description": "Failed to delete. Please check the body format before contacting the backend team"
+          }
+        }
+      }
+    },
+    "/article/addArticle": {
+      "post": {
+        "tags": [
+          "Article Collection"
+        ],
+        "summary": "Add article to the collections",
+        "description": "",
+        "operationId": "addArticle",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "formData",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "formData",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "in": "formData",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/article": {
+      "get": {
+        "tags": [
+          "Article Collection"
+        ],
+        "summary": "Get Article",
+        "description": "query can be one of the following\n?page=1\n?page=1&field=genre&value=action\n?page=1&field=title&value=spiderman\n\nvalue query can be anything user input",
+        "operationId": "getArticle",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "number from 1 to n"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "field",
+            "description": "could be title or category"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "value",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "/article/details/{article_id}": {
+      "get": {
+        "tags": [
+          "Article Collection"
+        ],
+        "summary": "Get the article by id",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "422": {
+            "description": "ERROR"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "article_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "/article/{article_id}/updateThumbnail": {
+      "put": {
+        "tags": [
+          "Article Collection"
+        ],
+        "summary": "update article thumbnail",
+        "description": "",
+        "operationId": "updateThumbnail",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/article/{articleId}": {
+      "get": {
+        "tags": [
+          "Article Collection"
+        ],
+        "summary": "Bookmark an article",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "description": "Insert the article's _id here",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully bookmark an article"
+          },
+          "422": {
+            "description": "Failed to bookmark, maybe wrong id? Contact backend team."
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Article Collection"
+        ],
+        "summary": "Update article details",
+        "description": "",
+        "operationId": "updateArticle",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "You can update even if only one parameter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/article"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Article Collection"
+        ],
+        "summary": "delete article",
+        "description": "",
+        "operationId": "deleteArticle",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "if the email registered, we will sent you email",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "ERROR",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string"
+                },
+                "errors": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/ads": {
+      "get": {
+        "tags": [
+          "Ads Collection"
+        ],
+        "summary": "Get all approved advertisement while admin can get all advertisement.",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Which page do you want? The default is 1 (btw, the limit is always 10)",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Ads Collection"
+        ],
+        "summary": "Create an advertisement. Only a business user can use this feature",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Ad"
+                },
+                "body": {
+                  "type": "string",
+                  "example": "This is an ad"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successfully added an Ads"
+          },
+          "401": {
+            "description": "Not a business user"
+          },
+          "422": {
+            "description": "ERROR"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/ads/{ads_id}": {
+      "get": {
+        "tags": [
+          "Ads Collection"
+        ],
+        "summary": "Get one advertisement by id. Only admin can use this.",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ads_id",
+            "in": "path",
+            "description": "Insert the advertisement's _id",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "401": {
+            "description": "Not an admin"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Ads Collection"
+        ],
+        "summary": "Admin approve or unapprove an advertisement",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ads_id",
+            "in": "path",
+            "description": "Insert the advertisement's _id",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The default is approving. To unapprove, fill this query with false",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "401": {
+            "description": "Not an admin"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Ads Collection"
+        ],
+        "summary": "Admin delete an advertisement",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ads_id",
+            "in": "path",
+            "description": "Insert the advertisement's _id",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "401": {
+            "description": "Not an admin"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      }
+    },
+    "/ads/{ads_id}/updateBanner": {
+      "put": {
+        "tags": [
+          "Ads Collection"
+        ],
+        "summary": "Upload an advertisement's banner.",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ads_id",
+            "in": "path",
+            "description": "Insert the advertisement's _id",
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "Insert an image file for banner here",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      }
+    },
+    "/comment/{article_id}": {
+      "post": {
+        "tags": [
+          "Comment Collection"
+        ],
+        "summary": "Post a comment",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "article_id",
+            "in": "path",
+            "description": "Insert the article's _id",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Insert the token here",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "example": "I want to comment"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "SUCCESS"
+          },
+          "404": {
+            "description": "Article not found"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Comment Collection"
+        ],
+        "summary": "Get a comment",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "article_id",
+            "in": "path",
+            "description": "Insert the article's _id",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Insert the token here",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "404": {
+            "description": "Article/comment not found"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Comment Collection"
+        ],
+        "summary": "Edit a comment",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "article_id",
+            "in": "path",
+            "description": "Insert the article's _id",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Insert the token here",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description ": {
+                  "type": "string",
+                  "example": "I want to comment, edited"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "404": {
+            "description": "Article/comment not found"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Comment Collection"
+        ],
+        "summary": "Delete a comment",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "article_id",
+            "in": "path",
+            "description": "Insert the article's _id",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Insert the token here",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "404": {
+            "description": "Article/comment not found"
+          },
+          "422": {
+            "description": "FAILED"
+          }
+        }
+      }
+    },
+    "/support": {
+      "post": {
+        "tags": [
+          "Support Collection"
+        ],
+        "summary": "Send a new complain/question from user to admin",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Test"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "I want to test"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "SUCCESS"
+          },
+          "401": {
+            "description": "Not logged in yet"
+          },
+          "422": {
+            "description": "ERROR"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Support Collection"
+        ],
+        "summary": "Admin collect the user's complains/questions",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Which page do you want? The default is 1",
+            "type": "string"
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Add this query if admin want to get one mail, will change isRead to true",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "401": {
+            "description": "Not logged in yet"
+          },
+          "404": {
+            "description": "Not found, wrong id?"
+          },
+          "422": {
+            "description": "ERROR"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Support Collection"
+        ],
+        "summary": "Admin can delete all mail",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "401": {
+            "description": "Not an admin"
+          },
+          "404": {
+            "description": "Not found, wrong id?"
+          },
+          "422": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/support/{_id}": {
+      "delete": {
+        "tags": [
+          "Support Collection"
+        ],
+        "summary": "Admin can delete one mail by id",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "description": "Insert the support's _id here",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+          "401": {
+            "description": "Not an admin"
+          },
+          "404": {
+            "description": "Not found, wrong id?"
+          },
+          "422": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/like/{article_id}": {
+      "post": {
+        "tags": [
+          "Article Collection"
+        ],
+        "summary": "Liked!",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token of user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "article_id",
+            "description": "Insert the article's _id here",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "name",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "5e5a0aece7462122c335e355"
+        },
+        "name": {
+          "type": "string",
+          "example": "Test 01"
+        },
+        "email": {
+          "type": "string",
+          "example": "test01@mail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        },
+        "business": {
+          "type": "string",
+          "default": "(business' _id here)"
+        },
+        "privilege": {
+          "type": "boolean",
+          "default": false
+        },
+        "isBusiness": {
+          "type": "boolean",
+          "default": false
+        },
+        "image": {
+          "type": "string",
+          "default": "https://i.pinimg.com/originals/0d/36/e7/0d36e7a476b06333d9fe9960572b66b9.jpg"
+        },
+        "isConfirmed": {
+          "type": "boolean",
+          "default": false
+        },
+        "business_bookmarks": {
+          "type": "array",
+          "example": [
+            "_id business1",
+            "_id business2"
+          ]
+        },
+        "article_bookmarks": {
+          "type": "array",
+          "example": [
+            "_id article1",
+            "_id article2"
+          ]
+        }
+      }
+    },
+    "Business": {
+      "type": "object",
+      "required": [
+        "name",
+        "company"
+      ],
+      "properties": {
+        "owner_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "example": "Gojek"
+        },
+        "company": {
+          "type": "string",
+          "example": "PT. Karya Anak Bangsa"
+        },
+        "isApproved": {
+          "type": "boolean",
+          "default": false
+        },
+        "logo": {
+          "type": "string",
+          "example": "https://i.pinimg.com/originals/0d/36/e7/0d36e7a476b06333d9fe9960572b66b9.jpg"
+        },
+        "description": {
+          "type": "string",
+          "example": "PT Aplikasi Karya Anak Bangsa, doing business as Gojek, is a Southeast Asian on-demand multi-service platform and digital payment technology group. Gojek was first established in Indonesia in 2010 as a call center to connect consumers to courier delivery and two-wheeled ride-hailing services"
+        },
+        "category": {
+          "type": "string",
+          "example": "Logistic"
+        },
+        "web_link": {
+          "type": "string",
+          "example": "www.gojek.com"
+        },
+        "gplay_link": {
+          "type": "string",
+          "example": "https://play.google.com/store/apps/details?id=com.gojek.app&hl=en"
+        }
+      }
+    },
+    "Inquiry": {
+      "type": "object",
+      "required": [
+        "owner",
+        "movie",
+        "rating"
+      ],
+      "properties": {
+        "isRead": {
+          "type": "boolean",
+          "default": false
+        },
+        "isAccepted": {
+          "type": "boolean"
+        },
+        "business_id": {
+          "type": "string"
+        },
+        "owner_id": {
+          "type": "string",
+          "example": "(_id of the account who write this inquiry)"
+        },
+        "name": {
+          "type": "string",
+          "example": "Test"
+        },
+        "email": {
+          "type": "string",
+          "example": "user@mail.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "08123456789"
+        },
+        "job": {
+          "type": "string",
+          "example": "Medical Staff"
+        },
+        "description": {
+          "type": "string",
+          "example": "We plan to hold an event on DD-MM-YYYY at X. We wish to form a partnership with your company in regard to........"
+        }
+      }
+    },
+    "Article": {
+      "type": "object",
+      "required": [
+        "title",
+        "body",
+        "category"
+      ],
+      "properties": {
+        "title": {
+          "type": "boolean",
+          "default": false
+        },
+        "body": {
+          "type": "string",
+          "example": "Test"
+        },
+        "category": {
+          "type": "string",
+          "example": "user@mail.com"
+        },
+        "thumbnail": {
+          "type": "string",
+          "example": "https://i.pinimg.com/originals/0d/36/e7/0d36e7a476b06333d9fe9960572b66b9.jpg"
+        },
+        "likes": {
+          "type": "array",
+          "example": [
+            "_id1",
+            "_id2",
+            "_id3"
+          ]
+        }
+      }
+    },
+    "Ads": {
+      "type": "object",
+      "required": [
+        "title",
+        "body"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "Test"
+        },
+        "body": {
+          "type": "string",
+          "example": "Ad body here"
+        },
+        "image": {
+          "type": "string",
+          "example": "https://i.pinimg.com/originals/0d/36/e7/0d36e7a476b06333d9fe9960572b66b9.jpg"
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "example": "(user's _id here)"
+        },
+        "article": {
+          "type": "string",
+          "example": "(article's _id here)"
+        },
+        "description": {
+          "type": "string",
+          "example": "Comment here"
+        }
+      }
+    },
+    "Support": {
+      "type": "object",
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "example": "(user's _id here)"
+        },
+        "title": {
+          "type": "string",
+          "example": "Test"
+        },
+        "description": {
+          "type": "string",
+          "example": "Complain here"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Backend Repository",
+    "url": "https://gitlab.com/glints-academy-5/Team-A/backend"
+  }
+}

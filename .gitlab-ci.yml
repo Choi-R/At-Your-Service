@@ -1,0 +1,37 @@
+stages:
+    - announce
+    - test
+    - deploy
+
+test:
+    image: node:12.13
+    stage: test
+    variables:
+        DB_CONNECTION_TEST: $DB_CONNECTION_TEST
+    services: 
+        - mongo:latest
+    script:
+        - echo $DB_CONNECTION_TEST
+        - npm install
+        - npm test
+    only:
+        - develop
+
+deploy:
+    image: ruby:2.5.6
+    stage: deploy
+    script:
+        - apt-get update -qy
+        - apt-get install -y ruby-dev
+        - gem install dpl
+        - dpl --provider=heroku --app=$HEROKU_APPNAME --api-key=$HEROKU_APIKEY
+    only:
+        - develop
+
+announce:
+    stage: announce
+    script:
+        - curl --data chat_id=$TELEGRAM_CHAT_ID --data-urlencode text="[$CI_COMMIT_REF_NAME] $CI_COMMIT_TITLE" $TELEGRAM_BOT_URL/sendMessage
+    only:
+        - master
+        - develop
