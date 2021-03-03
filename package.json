@@ -40,7 +40,7 @@
     "multer": "^1.4.2",
     "nodemon": "^2.0.2",
     "nyc": "^15.0.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "sequelize": "^5.21.5",
     "social-share": "^0.1.0",
     "supertest": "^4.0.2",
